@@ -12,7 +12,7 @@ function Logo() {
 
 function MainPage() {
   return (
-    <div className="flex  flex-col items-center justify-center  gap-1 w-[100%] h-[100vh]">
+    <div className="flex flex-col items-center justify-center gap-1 w-[100%] h-[100vh]">
       <Logo />
       <InputField></InputField>
     </div>
