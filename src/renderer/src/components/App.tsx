@@ -10,17 +10,24 @@ function Logo() {
   )
 }
 
-function MainPage() {
-  return (
-    <div className="flex flex-col items-center justify-center gap-1 w-[100%] h-[100vh]">
-      <Logo />
-      <InputField></InputField>
-    </div>
-  )
-}
-
 function App() {
-  return <MainPage></MainPage>
+  return (
+    <>
+      <Logo />
+      <InputField
+        inputs={[
+          {
+            placeholder: 'Enter a YouTube link (e.g., https://www.youtube.com/watch?v=xyz)',
+            width: 'w-[47.5rem] '
+          },
+          {
+            placeholder: 'Enter download location (e.g., /Users/yourname/Videos)',
+            width: 'w-[27.125rem] '
+          }
+        ]}
+      ></InputField>
+    </>
+  )
 }
 
 export default App
