@@ -16,6 +16,11 @@ function createWindow(): void {
       sandbox: false
     },
     titleBarStyle: 'hidden',
+    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
+    titleBarOverlay: {
+      color: '#010101',
+      symbolColor: '#FDFDFD',
+    },
     resizable: true
   })
 
