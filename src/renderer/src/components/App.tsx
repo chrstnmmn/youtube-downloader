@@ -9,7 +9,6 @@ import { useState } from 'react'
 
 /* Assets */
 import downloadIcon from '../assets/download.svg'
-
 function InputFieldSection() {
   return (
     <>
@@ -162,7 +161,7 @@ function DownloadButton({ setDownloading }: { setDownloading: (value: boolean) =
 
   const SetDownload = () => {
     setDownloading(true)
-    console.log('Downloading')
+    console.log("Now donwloading")
   }
 
   return (

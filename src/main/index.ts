@@ -4,8 +4,8 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 // import { spawn } from 'child_process'
 
-const width: number = 860
-const height: number = 420
+const width: number = 840
+const height: number = 380
 
 // const pyScriptPath: string = '../renderer/src/python/script.py'
 
