@@ -1,17 +1,27 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, screen, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { spawn } from 'child_process'
+
+const width: number = 850
+const height: number = 420
+
+const pyScriptPath: string = '../renderer/src/python/script.py'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1028,
-    height: 480,
+    minWidth: width,
+    minHeight: height,
+    width: width,
+    height: height,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     },
@@ -19,10 +29,13 @@ function createWindow(): void {
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     titleBarOverlay: {
       color: '#010101',
-      symbolColor: '#FDFDFD',
+      symbolColor: '#FDFDFD'
     },
     resizable: true
   })
+
+  const primaryDisplay = screen.getPrimaryDisplay()
+  primaryDisplay.workAreaSize
 
   mainWindow.webContents.closeDevTools()
 
@@ -74,6 +87,11 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+})
+
+// Hadnling the input from react and then calling the python script:
+ipcMain.on('send-data', (event, inputData) => {
+  const pythonProcess = spawn('python3', [pyScriptPath, inputData]);
 })
 
 // In this file you can include the rest of your app's specific main process

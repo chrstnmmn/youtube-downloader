@@ -14,7 +14,7 @@ export default {
       },
       boxShadow: {
         'glow': '0px 0px 39px 0px rgba(227, 227, 227, 0.20)'
-      }
+      },
     }
   },
   plugins: []

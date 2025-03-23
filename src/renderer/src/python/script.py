@@ -36,6 +36,6 @@ if __name__ == "__main__":
     else:
         print("❌ No valid URL or quality provided. Usage: python script.py <URL> <quality>")
         
-download_video("https://www.youtube.com/watch?v=lSD_L-xic9o", "highest")
+download_video("https://www.facebook.com/watch?v=1288664205496002", "highest")
 # Youtube Link testing:
 # https://www.youtube.com/watch?v=lSD_L-xic9o

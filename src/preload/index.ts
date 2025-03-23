@@ -1,9 +1,13 @@
-import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-
 
 // Custom APIs for renderer
 const api = {}
+
+const { contextBridge, ipcRenderer } = require('electron/renderer')
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  setTitle: (title) => ipcRenderer.send('set-title', title)
+})
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
