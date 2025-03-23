@@ -50,4 +50,8 @@ body {
   .no-drag {
     app-region: no-drag;
   }
+
+  .linear-gradient {
+    background: var(--GradientStroke, linear-gradient(270deg, #E600C7 0%, #FF2C72 100%));
+  }
 }

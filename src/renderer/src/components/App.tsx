@@ -48,7 +48,13 @@ function InputFieldSection() {
   )
 }
 
-function ProgressSection({ percentValue = 20 }: { percentValue?: number }) {
+function ProgressSection({
+  percentValue = 69,
+  setDownloading
+}: {
+  percentValue?: number
+  setDownloading: (value: boolean) => void
+}) {
   // Ensure percentValue is between 0 and 100
   const clampedPercentValue = Math.min(100, Math.max(0, percentValue))
 
@@ -61,7 +67,7 @@ function ProgressSection({ percentValue = 20 }: { percentValue?: number }) {
     return (
       <div
         id="GradientStroke"
-        className="w-[40.8rem] h-[1rem] px-[.2rem] rounded-full bg-gradient-to-r from-gradient-start from-20% via-gradient-middle via-50% to-gradient-end to-100% shadow-glow flex items-center justify-center"
+        className="w-[40.8rem] h-[1rem] px-[.2rem] rounded-full linear-gradient shadow-glow flex items-center justify-center"
       >
         <div
           id="Border"
@@ -78,7 +84,7 @@ function ProgressSection({ percentValue = 20 }: { percentValue?: number }) {
   }
 
   const DownloadLabel = () => {
-    const progressValue: number = 20
+    let progressValue: number = percentValue
     const etaValue: string = '04:30'
 
     const dlName: string =
@@ -98,10 +104,11 @@ function ProgressSection({ percentValue = 20 }: { percentValue?: number }) {
     )
   }
 
-  const StateButton = () => {
+  const StateButton = ({ setDownloading }: { setDownloading: (value: boolean) => void }) => {
     const [isPauseClick, setPauseClick] = useState(false)
 
     const CancelButton = () => {
+      setDownloading(false)
       console.log('Cancelled')
     }
     const PauseButton = () => {
@@ -143,20 +150,25 @@ function ProgressSection({ percentValue = 20 }: { percentValue?: number }) {
     <div className=" flex flex-col items-center">
       <DownloadLabel></DownloadLabel>
       <ProgressBar></ProgressBar>
-      <StateButton></StateButton>
+      <StateButton setDownloading={setDownloading}></StateButton>
     </div>
   )
 }
 
-function DownloadButton() {
+function DownloadButton({ setDownloading }: { setDownloading: (value: boolean) => void }) {
   const DownloadIcon = () => {
     return <img src={downloadIcon}></img>
   }
 
+  const SetDownload = () => {
+    setDownloading(true)
+    console.log('Downloading')
+  }
+
   return (
-    <div className="w-[8.4rem] h-[2.9rem] bg-gradient-to-r from-gradient-start from-20% via-gradient-middle via-50% to-gradient-end to-100% shadow-glow my-4 rounded-full flex justify-center items-center">
+    <div className="w-[8.4rem] h-[2.9rem] linear-gradient shadow-glow mt-2 rounded-full flex justify-center items-center">
       <button
-        // onClick={handleDownload}
+        onClick={SetDownload}
         className="text-accent-white text-sm font-extrabold w-[8.19rem] h-[2.75rem] bg-button-black border-2 border-accent-gray rounded-full flex items-center justify-center gap-1"
       >
         <DownloadIcon></DownloadIcon>
@@ -166,17 +178,26 @@ function DownloadButton() {
   )
 }
 
-function App() {
-
-  return (
+function RenderPage() {
+  const [isDownloading, setDownloading] = useState(false)
+  const inputSection = (
     <>
-      <section className="w-[100vw] flex flex-col justify-center items-center no-drag gap-2 select-none">
-        <Logo></Logo>
-        {/* <InputFieldSection></InputFieldSection>
-        <DownloadButton></DownloadButton> */}
-        <ProgressSection></ProgressSection>
-      </section>
+      <InputFieldSection></InputFieldSection>
+      <DownloadButton setDownloading={setDownloading}></DownloadButton>
     </>
+  )
+
+  const downloadSection = <ProgressSection setDownloading={setDownloading}></ProgressSection>
+
+  return isDownloading ? downloadSection : inputSection
+}
+
+function App() {
+  return (
+    <section className="w-[100vw] flex flex-col justify-center items-center no-drag gap-2 select-none">
+      <Logo></Logo>
+      <RenderPage></RenderPage>
+    </section>
   )
 }
 

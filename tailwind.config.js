@@ -13,12 +13,11 @@ export default {
         'gradient-end': '#E50004'
       },
       boxShadow: {
-        'glow': '0px 0px 39px 0px rgba(227, 227, 227, 0.20)'
+        glow: '0px 0px 72.3px 0px rgba(225, 225, 225, 0.23)'
       },
       gradientColorStops: {
-        'start:': '#FF5757',
-        'middle:': '#FFE53F',
-        'end:': '#FF1462',
+        'start:': '#E600C7',
+        'end:': '#FF2C72' 
       }
     }
   },

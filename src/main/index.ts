@@ -2,12 +2,12 @@ import { app, shell, BrowserWindow, screen, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { spawn } from 'child_process'
+// import { spawn } from 'child_process'
 
 const width: number = 860
 const height: number = 420
 
-const pyScriptPath: string = '../renderer/src/python/script.py'
+// const pyScriptPath: string = '../renderer/src/python/script.py'
 
 function createWindow(): void {
   // Create the browser window.
@@ -32,7 +32,7 @@ function createWindow(): void {
       symbolColor: '#FDFDFD'
     },
     resizable: false,
-    maximizable: false,
+    maximizable: false
   })
 
   const primaryDisplay = screen.getPrimaryDisplay()
@@ -90,10 +90,10 @@ app.on('window-all-closed', () => {
   }
 })
 
-// Hadnling the input from react and then calling the python script:
-ipcMain.on('send-data', (event, inputData) => {
-  const pythonProcess = spawn('python3', [pyScriptPath, inputData]);
-})
+// // Hadnling the input from react and then calling the python script:
+// ipcMain.on('send-data', (event, inputData) => {
+//   const pythonProcess = spawn('python3', [pyScriptPath, inputData])
+// })
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
