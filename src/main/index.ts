@@ -4,7 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { spawn } from 'child_process'
 
-const width: number = 850
+const width: number = 860
 const height: number = 420
 
 const pyScriptPath: string = '../renderer/src/python/script.py'
@@ -31,7 +31,8 @@ function createWindow(): void {
       color: '#010101',
       symbolColor: '#FDFDFD'
     },
-    resizable: true
+    resizable: false,
+    maximizable: false,
   })
 
   const primaryDisplay = screen.getPrimaryDisplay()
